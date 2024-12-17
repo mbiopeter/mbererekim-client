@@ -13,7 +13,7 @@ const QuotationReceipt = () => {
     const [ quotation, setQuotation] = useState({});
     
     useEffect(() => {
-        if (Object.keys(companyInfo).length > 0) {
+        if (items.length > 0) {
             window.print();
         }
     }, [companyInfo]);
