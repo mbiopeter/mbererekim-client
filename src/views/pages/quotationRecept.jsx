@@ -64,7 +64,7 @@ const QuotationReceipt = () => {
     },[])
     return (
         <div 
-            className="p-6 max-w-3xl mx-auto bg-white shadow-md border rounded-md print:border-none print:shadow-none print:border-none">
+            className="p-6 max-w-3xl mx-auto bg-white shadow-md border rounded-md print:border-none print:shadow-none print:border-none print:my-5">
             {/* Header Section */}
             <div 
                 className="flex justify-between items-center border-b pb-4 mb-4">
