@@ -13,10 +13,10 @@ const QuotationReceipt = () => {
     const [ quotation, setQuotation] = useState({});
     
     useEffect(() => {
-        if (items.length > 0) {
+        if (items.length > 0 && Object.keys(companyInfo).length > 0 && Object.keys(quotation).length > 0) {
             window.print();
         }
-    }, [companyInfo]);
+    }, [companyInfo, items, quotation]);
 
 
 
@@ -27,7 +27,7 @@ const QuotationReceipt = () => {
 
     //fetch company profile information
     const handleFetchDetails = async () => {
-        try {
+        try {at
             const results = await axios.get(`${url}/profile/all`);
             
             // Transform the data into an object
