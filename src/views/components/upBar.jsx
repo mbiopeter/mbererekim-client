@@ -7,25 +7,42 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import HomeIcon from '@mui/icons-material/Home';
 
-
-const UpBar = ({fullName}) => {
+const UpBar = ({ fullName }) => {
     const [expand, setExpand] = useState(false);
-    const location = useLocation(); 
-
+    const location = useLocation();
     const navigate = useNavigate();
+    const [userFullName, setUserFullName] = useState(fullName);
+    
+    const token = localStorage.getItem("token");
+    let decodedToken = null;
 
+    // Check if token exists and decode it
+    if (token) {
+        decodedToken = jwtDecode(token);
+    }
+
+    useEffect(() => {
+        if (!userFullName && decodedToken) {
+            // Use decoded values if fullName is empty
+            setUserFullName(`${decodedToken.firstName} ${decodedToken.secondName}`);
+        }
+    }, [userFullName, decodedToken]);
+
+    // Reset expand state when location changes
     useEffect(() => {
         setExpand(false);
     }, [location]);
-    
 
-    const toggleExpand = () => setExpand((prev) => !prev);
+    const toggleExpand = () => setExpand(prev => !prev);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login');
-    }
+    };
 
     return (
         <div className="sticky top-0 left-0 z-10 w-full bg-white shadow-sm">
@@ -39,15 +56,10 @@ const UpBar = ({fullName}) => {
                 </div>
                 <div className="relative flex w-full lg:w-auto justify-end">
                     <div className="flex items-center gap-1 md:gap-3">
-                            <Person2OutlinedIcon
-                                sx={{
-                                    fontSize: {
-                                    xs: 20,
-                                    sm: 24, 
-                                    md: 32,
-                                    },
-                                }}/>
-                            <span className="text-sm lg:text-lg font-medium text-gray-600 capitalize">{fullName}</span>
+                        <Person2OutlinedIcon sx={{ fontSize: { xs: 20, sm: 24, md: 32 } }} />
+                        <span className="text-sm lg:text-lg font-medium text-gray-600 capitalize">
+                            {userFullName || 'Loading...'}
+                        </span>
                         <button
                             onClick={toggleExpand}
                             className="flex items-center justify-center bg-yellow-500 text-white p-1 md:p-2 rounded-full focus:outline-none"
@@ -61,48 +73,36 @@ const UpBar = ({fullName}) => {
                     {/* Dropdown Menu */}
                     <div
                         className={`absolute top-full right-0 mt-2 bg-white shadow-lg rounded-lg w-48 p-4 z-20 transition-[opacity,transform] duration-300 ease-in-out ${
-                            expand
-                                ? 'opacity-100 translate-y-0 visible'
-                                : 'opacity-0 -translate-y-4 invisible'
+                            expand ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'
                         }`}>
                         <div className="flex flex-col gap-3">
-                            <Link to="/setting">
+                            <Link to="/">
                                 <div className="flex cursor-pointer items-center gap-3">
-                                    <SettingsIcon className="text-gray-600" />
-                                    <span className="text-sm font-medium text-gray-600 capitalize">
-                                        Settings
-                                    </span>
+                                    <HomeIcon className="text-gray-600" />
+                                    <span className="text-sm font-medium text-gray-600 capitalize">Home</span>
+                                </div>
+                            </Link>
+                            <Link to="/quotations">
+                                <div className="flex cursor-pointer items-center gap-3">
+                                    <AccountBalanceWalletIcon className="text-gray-600" />
+                                    <span className="text-sm font-medium text-gray-600 capitalize">Quotations</span>
                                 </div>
                             </Link>
                             <Link to="/profile">
                                 <div className="flex cursor-pointer items-center gap-3">
                                     <AccountCircleIcon className="text-gray-600" />
-                                    <span className="text-sm font-medium text-gray-600 capitalize">
-                                        Profile
-                                    </span>
+                                    <span className="text-sm font-medium text-gray-600 capitalize">Profile</span>
                                 </div>
                             </Link>
-                            <Link to="/">
+                            <Link to="/setting">
                                 <div className="flex cursor-pointer items-center gap-3">
-                                    <AccountCircleIcon className="text-gray-600" />
-                                    <span className="text-sm font-medium text-gray-600 capitalize">
-                                        Home
-                                    </span>
-                                </div>
-                            </Link>
-                            <Link to="/quotations">
-                                <div className="flex cursor-pointer items-center gap-3">
-                                    <AccountCircleIcon className="text-gray-600" />
-                                    <span className="text-sm font-medium text-gray-600 capitalize">
-                                        Quotations
-                                    </span>
+                                    <SettingsIcon className="text-gray-600" />
+                                    <span className="text-sm font-medium text-gray-600 capitalize">Settings</span>
                                 </div>
                             </Link>
                             <div className="flex cursor-pointer items-center gap-3" onClick={handleLogout}>
                                 <LogoutIcon className="text-gray-600" />
-                                <span className="text-sm font-medium text-gray-600 capitalize">
-                                    Log Out
-                                </span>
+                                <span className="text-sm font-medium text-gray-600 capitalize">Log Out</span>
                             </div>
                         </div>
                     </div>
