@@ -5,9 +5,6 @@ import { url } from '../../consts/urls';
 import { useParams } from 'react-router-dom';
 
 const QuotationReceipt = () => {
-    useEffect(() => {
-        window.print();
-    }, []);
 
     const { id } = useParams();
 
@@ -15,6 +12,14 @@ const QuotationReceipt = () => {
     const [items, setItems] = useState([]);
     const [ quotation, setQuotation] = useState({});
     
+    useEffect(() => {
+        if (Object.keys(companyInfo).length > 0) {
+            window.print();
+        }
+    }, [companyInfo]);
+
+
+
     let grandTotal = 0
     items.map((item) => {
         grandTotal += item.total
