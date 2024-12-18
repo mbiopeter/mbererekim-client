@@ -55,6 +55,20 @@ const Settings = () => {
             const response = await axios.post(`${url}/profile/update`, filteredDetails);
             setReload(!reload);
             toast.success(response.data.message);
+            setInputDetails({
+                name:'',
+                address:'',
+                email:'',
+                phone:'',
+                kra:'',
+                Signature:'',
+                equityAccount:'',
+                equityName:'',
+                paybill:'',
+                paybillAccount:'',
+                sendMoneyNumber:'',
+                sendMoneyName:''
+            })
         } catch (error) {
             toast.error(error.response?.data?.message || "An error occurred.");
         }
@@ -89,11 +103,13 @@ const Settings = () => {
                         <div className="w-full px-2 lg:px:0 lg:w-3/4 flex flex-col gap-4 pt-6">
                             <div className="w-full flex flex-col md:flex-row gap-5">
                                 <input
+                                    value={inputDetails.name}
                                     onChange={(e) => handleinputOnChange(e, 'name')}
                                     type="text"
                                     placeholder="Company Name"
                                     className="w-[100%] md:w-[48%] p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                                 <input
+                                    value={inputDetails.address}
                                     onChange={(e) => handleinputOnChange(e, 'address')}
                                     type="text"
                                     placeholder="Address"
@@ -101,11 +117,13 @@ const Settings = () => {
                             </div>
                             <div className="w-full flex flex-col md:flex-row gap-5">
                                 <input
+                                    value={inputDetails.email}
                                     onChange={(e) => handleinputOnChange(e, 'email')}
                                     type="text"
                                     placeholder="Email"
                                     className="w-[100%] md:w-[48%] p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                                 <input
+                                    value={inputDetails.phone}
                                     onChange={(e) => handleinputOnChange(e, 'phone')}
                                     type="text"
                                     placeholder="Phone Number"
@@ -113,11 +131,13 @@ const Settings = () => {
                             </div>
                             <div className="w-full flex flex-col md:flex-row gap-5">
                                 <input
+                                    value={inputDetails.kra}
                                     onChange={(e) => handleinputOnChange(e, 'kra')}
                                     type="text"
                                     placeholder="KRA PIN"
                                     className="w-[100%] md:w-[48%] p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                                 <input
+                                    value={inputDetails.Signature}
                                     onChange={(e) => handleinputOnChange(e, 'signature')}
                                     type="text"
                                     placeholder="Signature"
@@ -125,11 +145,13 @@ const Settings = () => {
                             </div>
                             <div className="w-full flex flex-col md:flex-row gap-5">
                                 <input
+                                    value={inputDetails.equityAccount}
                                     onChange={(e) => handleinputOnChange(e, 'equityAccount')}
                                     type="text"
                                     placeholder="Equity Bank Account Nuumber"
                                     className="w-[100%] md:w-[48%] p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                                 <input
+                                    value={inputDetails.equityName}
                                     onChange={(e) => handleinputOnChange(e, 'equityName')}
                                     type="text"
                                     placeholder="Equity Account Name"
@@ -137,11 +159,13 @@ const Settings = () => {
                             </div>
                             <div className="w-full flex flex-col md:flex-row gap-5">
                                 <input
+                                    value={inputDetails.paybill}
                                     onChange={(e) => handleinputOnChange(e, 'paybill')}
                                     type="text"
                                     placeholder="Paybill Number"
                                     className="w-[100%] md:w-[48%] p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                                 <input
+                                    value={inputDetails.paybillAccount}
                                     onChange={(e) => handleinputOnChange(e, 'paybillAccount')}
                                     type="text"
                                     placeholder="Paybill Account Number"
@@ -149,11 +173,13 @@ const Settings = () => {
                             </div>
                             <div className="w-full flex flex-col md:flex-row gap-5">
                                 <input
+                                    value={inputDetails.sendMoneyNumber}
                                     onChange={(e) => handleinputOnChange(e, 'sendMoneyNumber')}
                                     type="text"
                                     placeholder="Send Money Number"
                                     className="w-[100%] md:w-[48%] p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                                 <input
+                                    value={inputDetails.sendMoneyName}
                                     onChange={(e) => handleinputOnChange(e, 'sendMoneyName')}
                                     type="text"
                                     placeholder="Send Money Name"

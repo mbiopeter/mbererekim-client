@@ -15,6 +15,7 @@ const Quotations = () => {
         phone:'',
         description:'',
     });
+    
     const handleinputOnChange = (e,key) => {
         setQuotation(prev => ({
             ...prev,
@@ -73,6 +74,11 @@ const Quotations = () => {
             const response = await axios.post(`${url}/quotation/create`,quotation );
             setReload(!reload);
             toast.success(response.data.message)
+            setQuotation({
+                name:'',
+                phone:'',
+                description:'',
+            })
         }catch(error){
             toast.error(error.response.data.message);
         }
@@ -117,16 +123,19 @@ const Quotations = () => {
                         <div 
                             className="w-full px-2 lg:px:0 lg:w-3/4 flex flex-col gap-4 pt-6">
                             <input
+                                value={quotation.name} 
                                 onChange={(e) => handleinputOnChange(e, 'name')}
                                 type="text"
                                 placeholder="Quotation To Name"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <input
+                                value={quotation.phone} 
                                 onChange={(e) => handleinputOnChange(e, 'phone')}
                                 type="text"
                                 placeholder="Quotation To Phone Number"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <textarea
+                                value={quotation.description} 
                                 onChange={(e) => handleinputOnChange(e, 'description')}
                                 placeholder="Quotation Description"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"></textarea>

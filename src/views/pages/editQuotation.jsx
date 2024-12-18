@@ -62,6 +62,12 @@ const EditQuotation = () => {
                 const response = await axios.post(`${url}/quotation/update`, filteredDetails);
                 setReload(!reload); 
                 toast.success(response.data.message);
+                setEditData({
+                    quoteId:id,
+                    description: "",
+                    name: "",
+                    phone: ""
+                })
             } else {
                 toast.error("Please provide a field to update.");
             }
@@ -83,15 +89,18 @@ const EditQuotation = () => {
                     <div className={`w-full flex mb-10 justify-center overflow-hidden transition-all duration-500 ${expand ? "max-h-[600px]" : "max-h-0"}`}>
                         <div className="w-full px-2 lg:px:0 lg:w-3/4 flex flex-col gap-4 pt-6">
                             <textarea
+                                value={editData.description}
                                 onChange={(e) => handleInputChange(e, 'description')}
                                 placeholder="Description"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]" />
                             <input
+                                value={editData.name}
                                 onChange={(e) => handleInputChange(e, 'name')}
                                 type="text"
                                 placeholder="To Name"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]" />
                             <input
+                                value={editData.phone}
                                 onChange={(e) => handleInputChange(e, 'phone')}
                                 type="text"
                                 placeholder="To Phone"

@@ -76,6 +76,14 @@ const EditItem = () => {
                 const response = await axios.post(`${url}/item/update`, filteredDetails);
                 setReload(!reload); 
                 toast.success(response.data.message);
+                setEditedDetails({
+                    itemId: id,
+                    description: undefined,
+                    quantity: undefined,
+                    unit: undefined,
+                    rate: undefined,
+                    cts: undefined
+                })
             } else {
                 toast.error("Please provide a field to update.");
             }
@@ -94,25 +102,30 @@ const EditItem = () => {
                     <div className={`w-full flex mb-10 justify-center overflow-hidden transition-all duration-500 ${expand ? "max-h-[600px]" : "max-h-0"}`}>
                         <div className="w-full px-2 lg:px:0 lg:w-3/4 flex flex-col gap-4 pt-6">
                             <textarea
+                                value={editedDetails.description}
                                 onChange={(e) => handleInputChange(e, 'description')}
                                 placeholder="Description"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <input
+                                value={editedDetails.quantity}
                                 onChange={(e) => handleInputChange(e, 'quantity')}
                                 type="text"
                                 placeholder="Quantity"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <input
+                                value={editedDetails.unit}
                                 onChange={(e) => handleInputChange(e, 'unit')}
                                 type="text"
                                 placeholder="Unit"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <input
+                                value={editedDetails.rate}
                                 onChange={(e) => handleInputChange(e, 'rate')}
                                 type="text"
                                 placeholder="Rate"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <input
+                                value={editedDetails.cts}
                                 onChange={(e) => handleInputChange(e, 'cts')}
                                 type="text"
                                 placeholder="Cts"

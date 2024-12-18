@@ -86,7 +86,15 @@ const QuotationDetails = () => {
             const response = await axios.post(`${url}/item/create`,quotItems );
             setReload(!reload);
             toast.success(response.data.message);
-        }catch(error){
+            setQuotItems({
+                quoteId: id,
+                unit: "",
+                quantity: 0,
+                rate: 0,
+                cts: "",
+                description: ""
+            });
+                    }catch(error){
             toast.error(error.response.data.message);
         }
     }
@@ -136,25 +144,30 @@ const QuotationDetails = () => {
                         <div 
                             className="w-full px-2 lg:px:0 lg:w-3/4 flex flex-col gap-4 pt-6">
                             <textarea
+                                value={quotItems.description} 
                                 onChange={(e) => handleinputOnChange(e, 'description')}
                                 placeholder="Description"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"></textarea>
                             <input
+                                value={quotItems.quantity} 
                                 onChange={(e) => handleinputOnChange(e, 'quantity')}
                                 type="number"
                                 placeholder="Quantity"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <input
+                                value={quotItems.unit} 
                                 onChange={(e) => handleinputOnChange(e, 'unit')}
                                 type="text"
                                 placeholder="Unit"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <input
+                                value={quotItems.rate} 
                                 onChange={(e) => handleinputOnChange(e, 'rate')}
                                 type="number"
                                 placeholder="Rate"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]"/>
                             <input
+                                value={quotItems.cts} 
                                 onChange={(e) => handleinputOnChange(e, 'cts')}
                                 type="text"
                                 placeholder="Cts"

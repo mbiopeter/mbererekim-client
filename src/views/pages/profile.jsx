@@ -19,7 +19,7 @@ const Profile = ({
     const [editData, setEditData] = useState({
         userId:decodedToken.id,
         firstName: "",
-        secondNme: "",
+        secondName: "",
         email:"",
         prevPassword:"",
         password: ""
@@ -61,7 +61,14 @@ const Profile = ({
                 setReload(!reload); 
                 setRefetchUser(!refetchUser);
                 toast.success(response.data.message);
-                console.log(filteredDetails);
+                setEditData({
+                    userId:decodedToken.id,
+                    firstName: "",
+                    secondName: "",
+                    email:"",
+                    prevPassword:"",
+                    password: ""
+                })
             } else {
                 toast.error("Please provide a field to .");
             }
@@ -84,26 +91,31 @@ const Profile = ({
                         <div className="w-full px-2 lg:px:0 lg:w-3/4 flex flex-col gap-4 pt-6">
 
                             <input
+                                value={editData.firstName}
                                 onChange={(e) => handleInputChange(e, 'firstName')}
                                 type="text"
                                 placeholder="First Name"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]" />
                             <input
+                                value={editData.secondName}
                                 onChange={(e) => handleInputChange(e, 'secondName')}
                                 type="text"
                                 placeholder="Second Name"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]" />
                             <input
+                                value={editData.email}
                                 onChange={(e) => handleInputChange(e, 'email')}
                                 type="text"
                                 placeholder="Email"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]" />
                             <input
+                                value={editData.prevPassword}
                                 onChange={(e) => handleInputChange(e, 'prevPassword')}
                                 type="text"
                                 placeholder="Previous Password"
                                 className="p-2 pl-4 bg-[#f1f0f0] rounded focus:outline-none focus:border-[#4956e2] focus:ring-2 focus:ring-[#4956e2]" />
                             <input
+                                value={editData.password}
                                 onChange={(e) => handleInputChange(e, 'password')}
                                 type="text"
                                 placeholder="Password"
